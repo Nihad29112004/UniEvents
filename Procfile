@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath backend event_management.wsgi
