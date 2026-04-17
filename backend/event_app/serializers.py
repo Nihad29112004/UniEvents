@@ -14,22 +14,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'phone', 'password')
 
     def validate_email(self, value):
-        whitelist_emails = ['your_test_email@gmail.com']
+        
         email_lower = value.lower()
-
-        if email_lower in whitelist_emails:
-            return value
-
-        try:
-            local_part, domain = email_lower.split('@', 1)
-        except ValueError:
-            raise serializers.ValidationError("Please enter a valid email format.")
-
-        if not (local_part and domain.endswith('.edu.az') and domain != 'edu.az'):
-            raise serializers.ValidationError(
-                "Registration requires a university email (e.g., name@university.edu.az)."
-            )
-        return value
+        
+        if CustomUser.objects.filter(email=email_lower).exists():
+            raise serializers.ValidationError("This email is already registered.")
+            
+        return email_lower
 
     def create(self, validated_data):
         user = CustomUser(
