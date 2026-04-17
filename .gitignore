@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# Database
+*.sqlite3
+backend/db.sqlite3
+
+# Media uploads
+backend/media/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Temp files
+tmpclaude-*
+
+# OS
+.DS_Store
+Thumbs.db
